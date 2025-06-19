@@ -2,9 +2,7 @@
 
 A mobile application built with **React Native (Expo)** and a backend powered by **Laravel**.
 
-<p align="center">
-  <video controls src='https://github.com/tsiresymila1/chat-vocal-app/blob/main/demo.mp4' />
-</p>
+[Watch the demo](https://drive.google.com/file/d/19GG7L_n_DIs2HJS-DqkfvR8q-GrJD4_e/view?usp=sharing)
 
 ---
 

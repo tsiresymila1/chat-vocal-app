@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
+import { View, TouchableOpacity, Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import { router } from 'expo-router';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -47,86 +47,91 @@ const RegisterForm = () => {
     };
 
     return (
-        <View className="flex-1 justify-center gap-4">
-            <Text className="text-3xl font-bold text-center mb-8">Create Account</Text>
-            <Controller
-                control={control}
-                name="name"
-                render={({ field: { onChange, value } }) => (
-                    <Input
-                        placeholder="Enter your name"
-                        value={value}
-                        onChangeText={onChange}
-                        className="mb-1 "
-                        error={errors.name?.message}
-                    />
-                )}
-            />
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
+            className='w-full h-full flex-1'>
+            <View className="flex-1 justify-center gap-4">
+                <Text className="text-3xl font-bold text-center mb-8">Create Account</Text>
+                <Controller
+                    control={control}
+                    name="name"
+                    render={({ field: { onChange, value } }) => (
+                        <Input
+                            placeholder="Enter your name"
+                            value={value}
+                            onChangeText={onChange}
+                            className="mb-1 "
+                            error={errors.name?.message}
+                        />
+                    )}
+                />
 
-            <Controller
-                control={control}
-                name="email"
-                render={({ field: { onChange, value } }) => (
-                    <Input
-                        placeholder="Enter your email"
-                        value={value}
-                        onChangeText={onChange}
-                        autoCapitalize="none"
-                        keyboardType="email-address"
-                        className="mb-1"
-                        error={errors.email?.message}
-                    />
-                )}
-            />
+                <Controller
+                    control={control}
+                    name="email"
+                    render={({ field: { onChange, value } }) => (
+                        <Input
+                            placeholder="Enter your email"
+                            value={value}
+                            onChangeText={onChange}
+                            autoCapitalize="none"
+                            keyboardType="email-address"
+                            className="mb-1"
+                            error={errors.email?.message}
+                        />
+                    )}
+                />
 
-            <Controller
-                control={control}
-                name="password"
-                render={({ field: { onChange, value } }) => (
-                    <Input
-                        placeholder="Enter your password"
-                        value={value}
-                        onChangeText={onChange}
-                        secureTextEntry
-                        className="mb-1"
-                        error={errors.password?.message}
-                    />
-                )}
-            />
+                <Controller
+                    control={control}
+                    name="password"
+                    render={({ field: { onChange, value } }) => (
+                        <Input
+                            placeholder="Enter your password"
+                            value={value}
+                            onChangeText={onChange}
+                            secureTextEntry
+                            className="mb-1"
+                            error={errors.password?.message}
+                        />
+                    )}
+                />
 
-            <Controller
-                control={control}
-                name="confirmPassword"
-                render={({ field: { onChange, value } }) => (
-                    <Input
-                        placeholder="Confirm your password"
-                        value={value}
-                        onChangeText={onChange}
-                        secureTextEntry
-                        className="mb-6"
-                        error={errors.confirmPassword?.message}
-                    />
-                )}
-            />
+                <Controller
+                    control={control}
+                    name="confirmPassword"
+                    render={({ field: { onChange, value } }) => (
+                        <Input
+                            placeholder="Confirm your password"
+                            value={value}
+                            onChangeText={onChange}
+                            secureTextEntry
+                            className="mb-6"
+                            error={errors.confirmPassword?.message}
+                        />
+                    )}
+                />
 
-            <Button
-                onPress={handleSubmit(onSubmit)}
-                disabled={isSubmitting}
-                variant="default"
-                className="mb-4"
-            >
-                <Text>{isSubmitting ? 'Creating account...' : 'Sign Up'}</Text>
-            </Button>
+                <Button
+                    onPress={handleSubmit(onSubmit)}
+                    disabled={isSubmitting}
+                    variant="default"
+                    className="mb-4"
+                >
+                    <Text>{isSubmitting ? 'Creating account...' : 'Sign Up'}</Text>
+                </Button>
 
-            <TouchableOpacity
-                onPress={() => router.back()}
-                className="items-center"
-            >
-                <Text className="text-blue-500">
-                    Already have an account? Sign in
-                </Text>
-            </TouchableOpacity>
-        </View>
+                <TouchableOpacity
+                    onPress={() => router.back()}
+                    className="items-center"
+                >
+                    <Text className="text-blue-500">
+                        Already have an account? Sign in
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </KeyboardAvoidingView>
     );
 }
 

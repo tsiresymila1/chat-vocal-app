@@ -80,6 +80,12 @@ docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate
 ```
 
+- #### Seed default chat
+
+```sh
+docker-compose exec app php artisan db:seed
+```
+
 - #### Access the app
 
   - The API will be available at [http://localhost:8000](http://localhost:8000)

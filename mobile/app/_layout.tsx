@@ -1,7 +1,7 @@
 import { NAV_THEME } from "@/lib/constants";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
-import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -28,7 +28,7 @@ export default function RootLayout() {
     return null;
   }
 
-  console.log("isDarkColorScheme",isDarkColorScheme)
+  console.log("isDarkColorScheme", isDarkColorScheme)
 
   return (
     <QueryClientProvider client={queryClient}>

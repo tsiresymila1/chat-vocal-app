@@ -6,7 +6,7 @@ import { useAuthStore } from '@/store/auth';
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Alert, FlatList, KeyboardAvoidingView, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, KeyboardAvoidingView, Platform, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 type Message = {
@@ -17,7 +17,7 @@ type Message = {
 }
 
 export default function ChatDetailScreen() {
-    const { id } = useLocalSearchParams();
+    const { id } = useLocalSearchParams()
     const { isDarkColorScheme } = useColorScheme()
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputText, setInputText] = useState('');
@@ -84,7 +84,10 @@ export default function ChatDetailScreen() {
     }, []);
 
     return (
-        <KeyboardAvoidingView className='w-full h-full'>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
+            className='w-full h-full flex-1'>
             <SafeAreaView className="flex-1 bg-white dark:bg-slate-900">
                 <View className="flex-row items-center p-4 border-b border-gray-200 dark:border-gray-800">
                     <TouchableOpacity
@@ -93,7 +96,7 @@ export default function ChatDetailScreen() {
                     >
                         <Ionicons name="arrow-back" color={isDarkColorScheme ? "white" : "black"} size={24} />
                     </TouchableOpacity>
-                    <Text className="text-xl font-semibold">Chat {id}</Text>
+                    <Text className="text-xl font-semibold">Chat {id.toString()}</Text>
                 </View>
                 <FlatList
                     ref={flatListRef}
@@ -119,7 +122,9 @@ export default function ChatDetailScreen() {
                             }
                         }, 50);
                     }}
-                    ListEmptyComponent={() => <View className='flex justify-center items-center'><Text>{isLoading || isFetching ? "Loading" : "No data"}</Text> </View>}
+                    ListEmptyComponent={() => <View className='flex justify-center items-center'>
+                        <Text>{isLoading || isFetching ? "Loading" : "No data"}</Text>
+                    </View>}
                 />
                 <View className="p-4 border-t border-gray-200 dark:border-gray-800 w-full">
                     <View className="flex flex-row items-center">

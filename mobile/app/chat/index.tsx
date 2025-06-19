@@ -1,15 +1,15 @@
+import { ToggleThemeButton } from '@/components/toogle-theme-button';
 import { Text } from '@/components/ui/text';
 import { $api } from '@/lib/api/client';
 import { paths } from '@/lib/api/openapi';
 import { useAuthStore } from '@/store/auth';
+import { useThemeStore } from '@/store/theme';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { Alert, FlatList, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ChatItem from './_components/chat-item';
-import { useThemeStore } from '@/store/theme';
-import { ToggleThemeButton } from '@/components/toogle-theme-button';
 
 export type Chat = paths["/chats"]["get"]["responses"]["200"]["content"]["application/json"][number]
 
@@ -35,7 +35,7 @@ export default function ChatListScreen() {
                 router.push(`/chat/${res.id}`)
             }
         } catch (_e) {
-            Alert.alert("Error during initiate chat")
+            Alert.alert(`Error during initiate chat ${_e}`)
         }
 
     }, [])
